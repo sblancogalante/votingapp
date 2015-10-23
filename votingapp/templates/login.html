@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html ng-app="votingApp">
   <head>
       <title>Votacion</title>
       <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
       <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
       <link href="../static/login.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+      <script src="/static/voting.js"></script>
 
   </head>
 
   <body>
 
-      <div class="jumbotron">
+      <div ng-controller="votingController as voting" class="jumbotron">
 
           <h1>Elecciones 2015</h1>
           <h2>Ingreso</h2>
 
-          <form class="form-signin">
+          <form ng-submit="voting.login()" class="form-signin">
               <label for="credSerie" class="sr-only">Serie</label>
-              <input type="text" name="credencialSerie" id="credSerie" class="form-control" placeholder="Serie" required autofocus>
+              <input ngmodel="serie" type="text" name="credencialSerie" id="credSerie" class="form-control" placeholder="Serie" required autofocus>
               <label for="credNumero" class="sr-only">Numero</label>
-              <input type="number" name="credencialNumero" id="credNumero" class="form-control" placeholder="Numero" required autofocus>
-              <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">Entrar</button>
+              <input ngmodel="numero" type="number" name="credencialNumero" id="credNumero" class="form-control" placeholder="Numero" required autofocus>
+              <input type="submit" id="btnSignUp" class="btn btn-lg btn-primary btn-block" value="Entrar">
       </form>
       </div>
       <footer class="footer">

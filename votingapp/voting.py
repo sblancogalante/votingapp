@@ -21,3 +21,4 @@ def signUp():
         return json.dumps({'html':'<span>Usuario valido</span>'})
     else:
         return json.dumps({'html':'<span>Ingrese los valores en los campos requeridos, por favor</span>'})
+

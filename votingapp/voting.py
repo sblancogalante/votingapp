@@ -8,7 +8,7 @@ def index():
 if __name__ == "__main__":
     app.run()
 
-@app.route('/login',methods=['POST'])
+@app.route('/login', methods=['POST'])
 def signUp():
 
 

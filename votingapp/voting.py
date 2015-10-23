@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
 
 @app.route('/login', methods=['POST'])
-def signUp():
+def sign_up():
 
     _serie = request.form['credSerie']
     _numero = request.form['credNumero']

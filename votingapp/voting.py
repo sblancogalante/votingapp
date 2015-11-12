@@ -3,16 +3,13 @@ from flask.ext.mysqldb import MySQL
 
 app = Flask(__name__)
 mysql = MySQL()
-
 # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''
-app.config['MYSQL_DATABASE_DB'] = 'votacionesDB'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'root'
+app.config['MYSQL_DB'] = 'votacionesDB'
+app.config['MYSQL_HOST'] = 'localhost'
 mysql.init_app(app)
 
-conn = mysql.connect()
-cursor = conn.cursor()
 
 @app.route('/')
 def index():
@@ -21,13 +18,21 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def sign_up():
+    print('caca')
+    try:
+        cursor = mysql.connection.cursor()
+    except Exception as e:
+        print(str(e))
+
+    print('caca2')
     data = json.loads(request.data)
     serie = data.get('serie')
     numero = data.get('numero')
     # # validate the received values
     if serie and numero:
-        conn.commit()
-        return json.dumps('true')
+        cursor.execute("""SELECT user, host FROM mysql.user""")
+        print(cursor.fetchall())
+        return json.dumps(str(cursor.fetchall()))
     else:
         return json.dumps('false')
 

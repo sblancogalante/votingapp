@@ -18,13 +18,7 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def sign_up():
-    print('caca')
-    try:
-        cursor = mysql.connection.cursor()
-    except Exception as e:
-        print(str(e))
-
-    print('caca2')
+    cursor = mysql.connection.cursor()
     data = json.loads(request.data)
     serie = data.get('serie')
     numero = data.get('numero')

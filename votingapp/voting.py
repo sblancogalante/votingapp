@@ -5,7 +5,7 @@ app = Flask(__name__)
 mysql = MySQL()
 # MySQL configurations
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'votacionesDB'
 app.config['MYSQL_HOST'] = 'localhost'
 mysql.init_app(app)
@@ -24,7 +24,8 @@ def sign_up():
     numero = data.get('numero')
     # # validate the received values
     if serie and numero:
-        cursor.execute("""SELECT user, host FROM mysql.user""")
+        cursor.execute("""select votantes.doc_serie, votantes.doc_num from votantes
+        where votantes.doc_serie = %sserie and votantes.doc_num = %snumero;""", (serie, numero))
         print(cursor.fetchall())
         return json.dumps(str(cursor.fetchall()))
     else:

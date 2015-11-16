@@ -1,17 +1,13 @@
 var votingApp = angular.module('votingApp', []);
-votingApp.controller('votingController', ['$scope', '$http', function($scope, $http) {
+votingApp.controller('votingController', ['$scope', '$http', '$window', function($scope, $http, $window) {
   var voting = this;
   voting.login = function() {
-  var loginUrl = '/login';
-    $http.post(loginUrl, {'serie': voting.serie, 'numero': voting.numero}).success(function(data, status, headers, config) {
-        if (data.msg != '') {
-          console.log('Logeaste');
-        } else {
-        }
-    }).error(function(data, status) { // called asynchronously if an error occurs
-        // or server returns response with an error status.
-        console.log('error');
-    });
+
+      var loginUrl = '/login';
+      var request = $http.post(loginUrl, {'serie': voting.serie, 'numero': voting.numero});
+      request.success(function(){
+          $window.location.href = '/caca';
+      });
 }
 }
 ]);
